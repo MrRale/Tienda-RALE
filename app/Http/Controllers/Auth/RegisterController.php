@@ -1,0 +1,89 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use App\Models\ShoppingCart;
+use App\Providers\RouteServiceProvider;
+use App\Models\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
+class RegisterController extends Controller
+{
+    /*
+    |--------------------------------------------------------------------------
+    | Register Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles the registration of new users as well as their
+    | validation and creation. By default this controller uses a trait to
+    | provide this functionality without requiring any additional code.
+    |
+    */
+
+    use RegistersUsers;
+
+    /**
+     * Where to redirect users after registration.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        // dd($data);
+        return Validator::make($data,
+         [
+            'name' => ['required', 'string', 'max:255'],
+            'cedula'=> ['required','string','max:10'],
+            'ruc'=> ['required','string','max:13'],
+            'telefono'=> ['required','string'],
+            // 'direccion'=> ['required','string'],
+            // 'empresa'=> ['string'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
+ 
+    protected function create(array $data)
+    {
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'cedula'=>$data['cedula'],
+            'ruc'=>$data['ruc'],
+            'telefono'=>$data['telefono'],
+            // 'direccion'=>$data['direccion'],
+            // 'empresa'=>$data['empresa'],
+            'password' => Hash::make($data['password']),
+        ]);
+        $user->assignRole('Cliente');
+        $shopping_cart = ShoppingCart::get_the_session_shopping_cart();
+        $shopping_cart->update([
+            "user_id"=>$user->id
+        ]);
+        return $user;
+    }
+}
