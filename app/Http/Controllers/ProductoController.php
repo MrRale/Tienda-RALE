@@ -41,9 +41,46 @@ class ProductoController extends Controller
   
     public function store(Request $request)
     {
-        $stock = $request['stock'];
-        // dd($stock);
-        
+
+        if(request()->hasFile('images')){
+            $campos = [
+                'imagen' => 'max:1000|mimes:jpeg,png,jpg',
+            ];
+            $mensaje = [
+                'imagen.mimes'=>'La imagen debe ser jpg, png o jpeg',
+                'imagen.max'=>'La imagen es muy pesada',
+            ];
+            $this->validate($request, $campos, $mensaje);
+        }
+
+
+        $campos = [
+            'nombre' => 'required|string|max:50',
+            'marca' => 'required|string|max:30',
+            'stock' => 'required|numeric|min:1',
+            'descripcion' => 'string|max:256',
+            'codigo'=>'required|string|max:15',
+            'precio'=>'required|numeric|min:0.01',
+            'imagen' => 'max:1000|mimes:jpeg,png,jpg',
+            'categoria_id'=>'required',
+            'inventario_id'=>'required'
+        ];
+        $mensaje = [
+            'required' => ':attribute es requerido',
+            'nombre.max'=>'El nombre no debe sobrepasar los 50 caracteres',
+            'marca.max'=>'La marca no debe sobrepasar los 30 caracteres',
+            'stock.min'=>'El stock no debe tener al menos 1 producto',
+            'codigo.max'=>'El codigo no debe tener mas de 15 digitos',
+            'precio.min'=>'El precio debe tener un valor mayor a cero',
+            'imagen.mimes'=>'La imagen debe ser jpg, png o jpeg',
+            'imagen.max'=>'La imagen es muy pesada',
+            'descripcion.max'=>'La descripción debe tener un máximo de 256 caracteres',
+            'categoria_id.required'=>'La categoría es requerida',
+            'inventario_id.required'=>'El inventario es requerido',
+
+        ];
+        $this->validate($request, $campos, $mensaje);
+
         $request = $request->except('_token');
         $producto =  Producto::create([
             "nombre" => $request['nombre'],
@@ -56,6 +93,7 @@ class ProductoController extends Controller
             "categoria_id" =>$request['categoria_id'],
             "inventario_id" =>$request['inventario_id']
         ]);
+       
 
        $this->upload_file($request,$producto);
        Alert::toast('Producto agregado', 'success');
@@ -86,7 +124,8 @@ class ProductoController extends Controller
     public function upload_file($request , $producto){
         $urlimages = [];
         if(request()->hasFile('images')){
-           
+          
+            
             $images = request()->file('images');
             foreach($images as $image){
             $nombre = time().$image->getClientOriginalName();
@@ -114,6 +153,42 @@ class ProductoController extends Controller
     {
         // $anuncio = Anuncio::findOrFail($request->get('anuncio_id'));
   
+        
+        if(request()->hasFile('image')){
+            $campos = [
+                'image' => 'max:1000|mimes:jpeg,png,jpg',
+            ];
+            $mensaje = [
+                'image.mimes'=>'La imagen debe ser jpg, png o jpeg',
+                'image.max'=>'La imagen es muy pesada',
+            ];
+            $this->validate($request, $campos, $mensaje);
+        }
+        
+        $campos = [
+            'nombre' => 'required|string|max:50',
+            'marca' => 'required|string|max:30',
+            'stock' => 'required|numeric|min:1',
+            'descripcion' => 'string|max:256',
+            'codigo'=>'required|string|max:15',
+            'precio'=>'required|numeric|min:0.01',
+            'categoria_id'=>'required',
+            'inventario_id'=>'required'
+        ];
+        $mensaje = [
+            'required' => ':attribute es requerido',
+            'nombre.max'=>'El nombre no debe sobrepasar los 50 caracteres',
+            'marca.max'=>'La marca no debe sobrepasar los 30 caracteres',
+            'stock.min'=>'El stock no debe tener al menos 1 producto',
+            'codigo.max'=>'El codigo no debe tener mas de 15 digitos',
+            'precio.min'=>'El precio debe tener un valor mayor a cero',
+            'descripcion.max'=>'La descripción debe tener un máximo de 256 caracteres',
+            'categoria_id.required'=>'La categoría es requerida',
+            'inventario_id.required'=>'El inventario es requerido',
+        ];
+        $this->validate($request, $campos, $mensaje);
+
+
         $request= $request->except('_token');
         $producto->update([
             "nombre"=>$request['nombre'],
@@ -150,11 +225,8 @@ class ProductoController extends Controller
     
 }
 
-   
     public function destroy(Producto $producto)
     {
-        //
-  
         Producto::destroy($producto->id);
         Alert::toast('Producto eliminado', 'success');
         return back()->with('mensaje','Producto eliminado');

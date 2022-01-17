@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use App\Rules\ValidarEmailLogin;
 
 trait AuthenticatesUsers
 {
@@ -69,18 +70,22 @@ trait AuthenticatesUsers
      */
     protected function validateLogin(Request $request)
     {
+        $user = User::where('email',$request['email'])->first();
+        
+        if($user == null  || ($user->password != $request['password']) ){ // si existe el correo
+            return back()->with('mensaje','Los datos no coinciden con los del sistema');
+        }
         $request->validate([
             $this->username() => 'required|string',
             'password' => 'required|string',
+            // $this->username()=>[new validarEmailLogin]
+        ],[
+            'email.required'=>'Ingrese el correo electrónico',
+            'password.required'=>'Ingrese la contraseña'
         ]);
     }
 
-    /**
-     * Attempt to log the user into the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return bool
-     */
+   
     protected function attemptLogin(Request $request)
     {
         return $this->guard()->attempt(

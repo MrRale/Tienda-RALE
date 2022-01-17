@@ -1,7 +1,17 @@
 @extends('paginas.admin.dashboard')
 
 @section('contenido')
-
+@if(count($errors)>0)
+<div class="alert alert-danger" role="alert">
+    <ul>
+        @foreach($errors->all() as $error)
+        <li>
+            {{$error}}
+        </li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <div class="page-header">
     <h3 class="page-title">
        Editar producto
@@ -63,7 +73,7 @@
 
           <div class="form-group">
             <label for="exampleInputName1">Precio</label>
-            <input name="precio" type="number" class="form-control" id="exampleInputName1" value="{{$producto->precio}}" placeholder="precio">
+            <input name="precio" type="number" class="form-control" step="0.01" id="exampleInputName1" value="{{$producto->precio}}" placeholder="precio">
           </div>
           
           <label for="exampleInputEmail3">Imagenes</label>

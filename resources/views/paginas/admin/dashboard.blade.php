@@ -526,7 +526,10 @@
             </a>
             <div class="collapse" id="page-layouts4">
               <ul class="nav flex-column sub-menu">
-                <li class="newitem"> <a class="nav-link" href="{{route('admin.pedidos')}}">Ver pedidos</a></li>
+                <li class="newitem"> <a class="nav-link" href="{{route('admin.pedidos')}}">Por clientes</a></li>
+              </ul>
+              <ul class="nav flex-column sub-menu">
+                <li class="newitem"> <a class="nav-link" href="{{route('admin.pedidosVendedor')}}">Por vendedores</a></li>
               </ul>
             </div>
           </li>

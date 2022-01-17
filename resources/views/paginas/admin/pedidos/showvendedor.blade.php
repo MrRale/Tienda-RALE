@@ -22,12 +22,12 @@
                             @endif
 <div class="page-header">
     <h3 class="page-title">
-        Detalles del pedido
+        Detalles de la orden
     </h3>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Detalles del pedido</li>
+        <li class="breadcrumb-item active" aria-current="page">  Detalles de la orden</li>
       </ol>
     </nav>
   </div>
@@ -35,14 +35,14 @@
     <div class="card-body">
 
       <div class="container-fluid">
-        @if(!isset($cliente->perfil->image->url))
+        @if(!isset($vendedor->image->url))
         <img style="max-width:150px;" class="img-lg rounded-circle mb-3" src="{{asset('dashboard/images/user_default.png')}}" alt="foto">
         @else
-          <img style="max-width:300px;" class="img-lg rounded-circle mb-3" src="{{$cliente->image->url}}" class="card-img-top" alt="...">
+          <img style="max-width:300px;" class="img-lg rounded-circle mb-3" src="{{$vendedor->image->url}}" class="card-img-top" alt="...">
          @endif
 
         
-        <h3 class="text-right my-5">Orden&nbsp;&nbsp;# {{$pedido->id}}</h3>
+        <h3 class="text-right my-5">Orden&nbsp;&nbsp;# {{$orden->id}}</h3>
         <hr>
       </div>
       <div class="container-fluid d-flex justify-content-between">
@@ -52,12 +52,12 @@
         </div>
         <div class="col-lg-3 pr-0">
           <p class="mt-5 mb-2 text-right"><b>Emitida por</b></p>
-          <p class="text-right">{{$cliente->name}},<br> {{$cliente->cedula}},<br> {{$cliente->telefono}}<br> {{$pedido->direccion}}.</p>
+          <p class="text-right">{{$vendedor->name}},<br> {{$vendedor->cedula}},<br> {{$vendedor->telefono}}<br> {{$orden->direccion}}.</p>
         </div>
       </div>
       <div class="container-fluid d-flex justify-content-between">
         <div class="col-lg-3 pl-0">
-          <p class="mb-0 mt-5">Fecha de compra : {{date('d-m-Y', strtotime($pedido->fecha))}}</p>
+          <p class="mb-0 mt-5">Fecha de compra : {{date('d-m-Y', strtotime($orden->fecha))}}</p>
           
           {{-- <p>Fecha de vencimiento : {{$orden->fecha_orden->addDays(3)}}</p> --}}
         </div>
@@ -85,7 +85,7 @@
                 </tr>
               </thead>
               <tbody>
-                  @foreach($pedidos as $detalle)
+                  @foreach($ordenes as $detalle)
                 <tr>
                     <td>{{$detalle->id}}</td>
                     <td>

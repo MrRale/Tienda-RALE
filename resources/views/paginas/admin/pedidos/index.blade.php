@@ -43,7 +43,7 @@
                     <th>Pedido #</th>
                     <th>Fecha</th>
                     <th>Descripcion</th>
-                    <th>Cantidad</th>
+                    <th>Cliente</th>
                     <th>Estado</th>
                     <th>Total</th>
                     <th>Acciones</th>
@@ -55,7 +55,7 @@
                     <td>{{$pedido->id}}</td>
                     <td>{{$pedido->fecha}}</td>
                     <td>{{$pedido->descripcion}}</td>
-                    <td>{{$pedido->cantidad}}</td>
+                    <td>{{$pedido->user->name}}</td>
                     <td>{{$pedido->estado_pedido}}</td>
                     <td>{{$pedido->total}}</td>
                     <td>

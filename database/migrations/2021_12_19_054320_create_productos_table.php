@@ -18,7 +18,7 @@ class CreateProductosTable extends Migration
             $table->string('nombre');
             $table->string('marca');
             $table->integer('stock')->default(0);
-            $table->string('medida');
+            $table->string('medida')->nullable();//opcional
             $table->longText('descripcion')->nullable();
             $table->string('codigo',10);
             $table->decimal('precio')->default(0);

@@ -53,7 +53,11 @@ Route::group(['prefix' => 'admin', 'middleware'=>'admin'], function () {
     Route::get('/productos/categoria/{id}',[ProductoController::class,'productosByCategoria'])->name('producto.productosByCategoria');
     Route::get('/productos/inventario/{id}',[ProductoController::class,'productosByInventario'])->name('producto.productosByInventario');
     Route::get('/pedidos',[AdminController::class,'pedidos'])->name('admin.pedidos');
+    Route::get('/pedidos-vendedor',[AdminController::class,'pedidosVendedor'])->name('admin.pedidosVendedor');
+
     Route::get('/detalle/pedido/{pedido}',[AdminController::class,'showPedido'])->name('admin.detallePedidos');
+    Route::get('/detalle/pedido-vendedor/{id}',[AdminController::class,'showPedidoVendedor'])->name('admin.detallePedidosVendedor');
+
     Route::get('/detalle/estado/{id}',[AdminController::class,'cambiarEstadoPedido'])->name('admin.cambiarEstadoPedido');
     Route::get('/miembro/agregar',[AdminController::class,'agregarMiembro'])->name('admin.agregarMiembro');
     Route::post('/miembro/agregar',[AdminController::class,'guardarMiembro'])->name('admin.guardarMiembro');

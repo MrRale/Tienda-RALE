@@ -1,7 +1,17 @@
 @extends('paginas.admin.dashboard')
 
 @section('contenido')
-
+@if(count($errors)>0)
+<div class="alert alert-danger" role="alert">
+    <ul>
+        @foreach($errors->all() as $error)
+        <li>
+            {{$error}}
+        </li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <div class="page-header">
     <h3 class="page-title">
        Agregar producto
@@ -36,7 +46,7 @@
 
           <div class="form-group">
             <label for="codigo">Stock</label>
-            <input name="stock" type="number" class="form-control" id="exampleInputName1" placeholder="stock">
+            <input name="stock" min="1"  type="number" class="form-control" id="exampleInputName1" placeholder="stock">
           </div>
 
            <div class="form-group">
@@ -55,12 +65,12 @@
           </div>
           <div class="form-group">
             <label for="exampleInputName1">Precio</label>
-            <input name="precio" type="number" class="form-control" step="0.05"id="exampleInputName1" placeholder="precio">
+            <input name="precio" min="0.01" type="number" class="form-control" step="0.01" id="exampleInputName1" placeholder="precio">
           </div>
         
           <div class="form-group">
             <label for="exampleInputEmail3">Imagen</label>
-            <input name="images[]" type="file" class="form-control" id="images" multiple>
+            <input name="images[]" type="file" class="form-control" id="images" multiple required>
           </div>
 
        

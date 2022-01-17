@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Orden;
 use App\Models\Cuenta;
+use App\Models\Pedido;
 use App\Models\ShoppingCart;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -44,6 +46,14 @@ class User extends Authenticatable
     ];
     public function cuentas(){
         return $this->hasMany(Cuenta::class);
+    }
+
+    public function pedidos(){// estos pedidos los genera el cliente en linea
+        return $this->hasMany(Pedido::class);
+    }
+
+    public function ordenes(){// estas ordenes las genera el vendedor
+        return $this->hasMany(Orden::class);
     }
     
     public function shoppingCarts(){

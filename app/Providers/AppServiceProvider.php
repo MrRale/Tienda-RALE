@@ -30,10 +30,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();
-        
-        // $productos= Producto::paginate(3);
-        // $categorias = Categoria::all();
-        // view()->share(['productos'=>$productos, 'categorias'=>$categorias]);
-   
+        $productos= Producto::paginate(3);
+        $categorias = Categoria::all();
+        view()->share(['productos'=>$productos, 'categorias'=>$categorias]);
     }
 }

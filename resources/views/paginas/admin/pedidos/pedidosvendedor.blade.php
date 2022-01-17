@@ -22,25 +22,25 @@
                             @endif
 <div class="page-header">
     <h3 class="page-title">
-        Mis ventas
+      Pedidos por vendedores
     </h3>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Mis ventas</li>
+        <li class="breadcrumb-item active" aria-current="page">Pedidos por vendedores</li>
       </ol>
     </nav>
   </div>
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Mis ventas</h4>
+      <h4 class="card-title">Pedidos por vendedores</h4>
       <div class="row">
         <div class="col-12">
           <div class="table-responsive">
             <table id="order-listing" class="table">
               <thead>
                 <tr>
-                    <th>Venta #</th>
+                    <th>Pedido #</th>
                     <th>Fecha</th>
                     <th>Descripcion</th>
                     <th>Vendedor</th>
@@ -50,7 +50,7 @@
                 </tr>
               </thead>
               <tbody>
-                  @foreach($ventas as $orden)
+                  @foreach($ordenes as $orden)
                 <tr>
                     <td>{{$orden->id}}</td>
                     <td>{{$orden->fecha}}</td>
@@ -58,14 +58,20 @@
                     <td>{{$orden->user->name}}</td>
                     <td>{{$orden->estado_pedido}}</td>
                     <td>{{$orden->total}}</td>
-                    <td>   
-                      <a href="{{route('admin.detalleVenta',$orden->id)}}" id="botoncol" class="btn btn-outline-info " title ="Ver detalle"><i class="fas fa-eye"></i></a>
+                    <td>
+                   
+                    
+                      <a href="{{route('admin.detallePedidosVendedor',$orden->id)}}" id="botoncol" class="btn btn-outline-info " title ="Ver detalle"><i class="fas fa-eye"></i></a>
+            
+                      <a href="{{route('admin.cambiarEstadoPedido',$orden->id)}}" id="botoncol" class="btn btn-outline-success " title ="Cambiar estado del pedido"><i class="fas fa-user-check"></i></a>
+            
+                       
                     </td>
                 </tr>
 @endforeach
               </tbody>
             </table>
-            {!! $ventas->links() !!}
+            {!! $ordenes->links() !!}
           </div>
         </div>
       </div>

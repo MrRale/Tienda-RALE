@@ -26,6 +26,28 @@
         </div>
         <!-- Uren's Breadcrumb Area End Here -->
         <!-- Begin Uren's Login Register Area -->
+
+        {{-- @if (count($errors) > 0)
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>
+                        {{ $error }}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif --}}
+
+    @if (Session::has('mensaje'))
+    <div class="alert alert-success alert-dismissible" role="alert">
+        {{ Session::get('mensaje') }}
+        <button type="button" class="close" data-dismiss="alert" role="alert">
+            <span aria-button="true">&times;</span>
+        </button>
+    </div>
+@endif
+
         <div class="uren-login-register_area">
             <div class="container-fluid">
                 <div class="row" style="display:flex; justify-content: center;">
@@ -57,7 +79,7 @@
 
                                     <div class="col-md-6 col-12 mb--20">
                                         <label>RUC</label>
-                                        <input type="text" class="form-control @error('ruc') is-invalid @enderror" name="ruc" value="{{ old('ruc') }}" required autocomplete="ruc" autofocus>
+                                        <input type="text" class="form-control @error('ruc') is-invalid @enderror" name="ruc" value="{{ old('ruc') }}"  autocomplete="ruc" autofocus>
                                    
                                 @error('ruc')
                                 <span class="invalid-feedback" role="alert">

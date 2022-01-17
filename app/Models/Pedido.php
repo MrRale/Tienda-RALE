@@ -29,4 +29,10 @@ class Pedido extends Model
     public function detalle_pedidos(){
         return $this->hasMany(DetallePedido::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    
 }

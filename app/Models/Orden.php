@@ -38,4 +38,8 @@ class Orden extends Model
         return $this->hasMany(DetalleOrden::class);
     }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
 }

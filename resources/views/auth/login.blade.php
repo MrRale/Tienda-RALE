@@ -12,6 +12,7 @@
         @include('vistas-parciales.header')
         <!-- Uren's Header Main Area End Here -->
 
+     
         <!-- Begin Uren's Breadcrumb Area -->
         <div class="breadcrumb-area">
             <div class="container">
@@ -24,6 +25,7 @@
                 </div>
             </div>
         </div>
+      
         <!-- Uren's Breadcrumb Area End Here -->
         <!-- Begin Uren's Login Register Area -->
         <div class="uren-login-register_area">
@@ -35,6 +37,14 @@
                         @csrf
                             <div class="login-form">
                                 <h4  class="login-title text-center">Iniciar sesión</h4>
+                                @if (Session::has('mensaje'))
+                                <div class="alert alert-warning alert-dismissible" role="alert">
+                                    {{ Session::get('mensaje') }}
+                                    <button type="button" class="close" data-dismiss="alert" role="alert">
+                                        <span aria-button="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
                                 <div class="row" >
                                     <div class="col-md-12 col-12">
                                         <label>Correo electrónico*</label>
@@ -55,10 +65,10 @@
                                 @enderror
                                     </div>
                                     <div class="col-md-8">
-                                        <div class="check-box">
+                                        {{-- <div class="check-box">
                                             <input class="form-check-input" type="checkbox" name="remember" id="remember_me" {{ old('remember') ? 'checked' : '' }}>
                                             <label for="remember_me">Recordar</label>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="col-md-4">
                                         <div class="forgotton-password_info">

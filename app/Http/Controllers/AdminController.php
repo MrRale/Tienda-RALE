@@ -30,9 +30,25 @@ class AdminController extends Controller
         $pedidos = Pedido::paginate(2);
         return view('paginas.admin.pedidos.index', compact('pedidos'));
     }
+
+    public function pedidosVendedor(){
+        $ordenes = Orden::paginate(2);
+        // dd($ordenes);
+        return view('paginas.admin.pedidos.pedidosvendedor', compact('ordenes'));
+    }
+
     public function showPedido(Pedido $pedido){
         $pedidos = $pedido->detalle_pedidos()->get();
-        return view('paginas.admin.pedidos.show', compact('pedidos'));
+        $cliente = $pedido->user;
+        // dd($cliente);
+        return view('paginas.admin.pedidos.show', compact('pedido','pedidos','cliente'));
+    }
+
+    public function showPedidoVendedor($id){
+        $orden = Orden::find($id);
+        $ordenes = $orden->detalle_ordenes()->get();
+        $vendedor = $orden->user;
+        return view('paginas.admin.pedidos.showvendedor', compact('orden','ordenes','vendedor'));
     }
 
     public function cambiarEstadoPedido($id){

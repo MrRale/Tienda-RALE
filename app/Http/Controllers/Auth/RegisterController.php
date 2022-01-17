@@ -2,67 +2,66 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Models\ShoppingCart;
-use App\Providers\RouteServiceProvider;
+use Exception;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use App\Models\ShoppingCart;
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+
+
+use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Rules\ValidarCedula;
+use App\Rules\ValidarRUCPersonaNatural;
+use App\Rules\ValidarCedulaRepetida;
+use App\Rules\ValidarEmailRepetido;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+   
 
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
+   
     protected $redirectTo = '/';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
     protected function validator(array $data)
     {
-        // dd($data);
+        // dd($data['cedula']);
         return Validator::make($data,
          [
-            'name' => ['required', 'string', 'max:255'],
-            'cedula'=> ['required','string','max:10'],
-            'ruc'=> ['required','string','max:13'],
-            'telefono'=> ['required','string'],
-            // 'direccion'=> ['required','string'],
-            // 'empresa'=> ['string'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' =>'required|min:3|string|max:40',
+            'name' =>'required|min:3|string|max:40',
+            'cedula' => 'required|min:10|max:10|unique:users,cedula,'.$data['cedula'],
+            'telefono' => 'required|min:10|max:10|String',
+            'cedula' =>[new ValidarCedula],
+            'cedula'=>[new ValidarCedulaRepetida],
+            'email'=>[new ValidarEmailRepetido],
+            'ruc' =>[new validarRucPersonaNatural],
+            'email' => 'required|string|email|max:255|unique:users,email,'.$data['email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ],
+        [
+            'required' => ':attribute es requerido',
+            'cedula.unique'=>'La cédula ya existe',
+            'email.unique'=>'El correo electrónico ya está registrado',
+            'name.min'=>'El nombre debe tener una longitud mínima de 3 caracteres',
+            'name.max'=>'El nombre debe tener una longitud máxima de 40 caracteres',
+            'cedula.min' =>'La cédula debe tener una longitud de 10 dígitos',
+            'cedula.max' =>'La cédula debe tener una longitud de 10 dígitos',
+            'telefono.min'=>'El teléfono no debe tener menos de 10 dígitos',
+            'telefono.max'=>'El teléfono no debe tener mas de 10 dígitos',
+            'password.min'=>'La longitud de la contraseña debe ser de almenos 8 caracteres',
+            'password.confirmed'=>'La contraseña no coincide con la confirmación de la misma'
         ]);
     }
 

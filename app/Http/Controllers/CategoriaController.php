@@ -41,12 +41,16 @@ class CategoriaController extends Controller
         $campos = [
             'nombre' => 'required|string|max:30',
             'descripcion' => 'required|string|max:256',
-            'imagen' => 'required|max:10000|mimes:jpeg,png,jpg',
+            'imagen' => 'required|max:1000|mimes:jpeg,png,jpg',
         ];
 
         $mensaje = [
-            'required' => 'El :attribute es requerido',
+            'required' => ':attribute es requerido',
+            'nombre.max'=>'El nombre no debe sobrepasar los 30 caracteres',
+            'descripcion.max'=>'La descripcion no debe sobrepasar los 256 caracteres',
             'imagen.required' => 'La imagen es requerida',
+            'imagen.mimes'=>'La imagen debe ser jpg, png o jpeg',
+            'imagen.max'=>'La imagen es muy pesada',
             'descripcion.required' => 'La descripción es requerida',
         ];
 
@@ -85,6 +89,22 @@ class CategoriaController extends Controller
    
     public function update(Request $request, $id)
     {
+        $campos = [
+            'nombre' => 'required|string|max:30',
+            'descripcion' => 'required|string|max:256',
+            'imagen' => 'required|max:1000|mimes:jpeg,png,jpg',
+        ];
+        $mensaje = [
+            'required' => ':attribute es requerido',
+            'nombre.max'=>'El nombre no debe sobrepasar los 30 caracteres',
+            'descripcion.max'=>'La descripcion no debe sobrepasar los 256 caracteres',
+            'imagen.required' => 'La imagen es requerida',
+            'imagen.mimes'=>'La imagen debe ser jpg, png o jpeg',
+            'imagen.max'=>'La imagen es muy pesada',
+            'descripcion.required' => 'La descripción es requerida',
+        ];
+        $this->validate($request, $campos, $mensaje);
+
        $categoria = Categoria::findOrFail($id);
         $request = $request->except(['_token','_method']);
         $categoria->update([

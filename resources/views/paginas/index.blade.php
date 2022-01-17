@@ -42,6 +42,8 @@
             </div>
         </div>
 
+        
+
         <!-- Begin Featured Categories Area -->
         @include('vistas-parciales.nuevosproductos')
     </div>
