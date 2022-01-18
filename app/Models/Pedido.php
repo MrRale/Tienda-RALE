@@ -17,7 +17,6 @@ class Pedido extends Model
         "costo_envio",
         "direccion",
         "empresa",
-        "codigopostal",
         "cantidad",
         "estado_pedido",
         "user_id",

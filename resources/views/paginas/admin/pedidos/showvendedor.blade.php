@@ -61,6 +61,8 @@
           
           {{-- <p>Fecha de vencimiento : {{$orden->fecha_orden->addDays(3)}}</p> --}}
         </div>
+
+        <div> <a href="{{route('admin.pdfOrdenVendedor',$orden->id)}}">Imprimir <li class="fas fa-file-pdf"></li></a></div>
       </div>
 
 

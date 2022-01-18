@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use PDF;
 
 class ClienteController extends Controller
 {
@@ -25,6 +26,7 @@ class ClienteController extends Controller
         $pedidos = Pedido::where('user_id',Auth::id())->get();  
         return view('paginas.perfil',compact('cliente','pedidos'));
     }
+
     public function actualizarPerfil(Request $request){
         $user_id = auth::id();
         $user = User::find($user_id);
@@ -48,6 +50,30 @@ class ClienteController extends Controller
         return back();
     }
 
+    public function pdfPedido($id){
+        $band=false;
+        $user_id = Auth::id();
+        $cliente = User::find($user_id);
+        $pedido = Pedido::find($id);
+        $pedidosuser = Pedido::where('user_id',$user_id)->get(); //todos los pedidos de este user
+      
+        foreach($pedidosuser as $pu){
+            if($pu->id == $id){
+                $band=true;
+            }
+        }
+        if($band==false){
+            return redirect()->route('home.index')->with('mensaje','Comprobante no encontrado');
+        }
+
+       $pedidos =  $pedido->detalle_pedidos()->get();
+        // dd($user_id);
+        
+        $orden = Pedido::find($id);          
+        $pdf = PDF::loadView('pdf.cliente.pedidos', compact('pedido','pedidos','cliente'));
+        return $pdf->stream('pedido.pdf');
+    }
+
     public function pasarela(){
         $cliente_id = auth::id();
         $cliente = User::find($cliente_id);
@@ -58,11 +84,9 @@ class ClienteController extends Controller
    
 
     public function pagar(Request $request){
-    //    dd($request);
-     
+ 
         $campos = [
             'empresa' => 'max:40',
-            'codigopostal' => 'required|string|min:6|max:6', //pasar a numeric
             'direccion' => 'required',
             'ciudad' => 'required|string|max:35',
             'direccion' => 'required|String|max:100',
@@ -71,9 +95,6 @@ class ClienteController extends Controller
             'ciudad.required'=>'La ciudad es requerida',
             'ciudad.max'=>'El nombre de la ciudad es muy extenso',
             'empresa.max' => 'El nombre de la empresa es muy extenso',
-            'codigopostal.required' =>'El código postal es requerido',
-            'codigopostal.min'=>'El código postal debe tener una longitud de 6 dígitos',
-            'codigopostal.max'=>'El código postal debe tener una longitud de 6 dígitos',
             'direccion.required' => 'La dirección es requerida',
             'direccion.max' => 'La dirección es muy extensa',           
         ];
@@ -98,7 +119,6 @@ class ClienteController extends Controller
             "estado_pedido"=>"pendiente",//por default tambien es pendiente
             "empresa"=>$request['empresa'],
             "ciudad"=>"flkadfla",
-            "codigopostal"=>$request['codigopostal'],
             "direccion"=>$request['direccion'],
             "costo_envio"=>5,//luego lo hacemos dinamico
             "user_id"=>Auth::id(),

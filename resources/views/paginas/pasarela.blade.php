@@ -81,7 +81,14 @@
                                         </div>
                                     </div>
                                     
+
                                     <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Correo electrónico <span class="required">*</span></label>
+                                            <input placeholder="" value="{{$cliente->email}}" name="email" type="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
                                         <div class="checkout-form-list">
                                             <label>Dirección <span class="required">*</span></label>
                                             <input name="direccion" placeholder=""  type="text">
@@ -89,18 +96,13 @@
                                     </div>
                                    
                                    
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>Código postal<span class="required">*</span></label>
                                             <input placeholder="" name="codigopostal" type="text">
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="checkout-form-list">
-                                            <label>Correo electrónico <span class="required">*</span></label>
-                                            <input placeholder="" value="{{$cliente->email}}" name="email" type="email">
-                                        </div>
-                                    </div>
+                                    </div> --}}
+                                   
                                     <div class="col-md-12">
                                         <div class="checkout-form-list">
                                             <label>Descripción</label>

@@ -17,6 +17,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -127,6 +128,23 @@ class AdminController extends Controller
         // $miembros = Role::whereNotIn('name', ['Cliente'])->get();//obtenemos los roles excepto al rol cliente
         
         return view('paginas.admin.miembro.listar', compact('miembros'));
+    }
+
+    public function pdfPedidoCliente($id){ 
+         $pedido = Pedido::find($id); 
+         $pedidos = $pedido->detalle_pedidos()->get();
+        $cliente = User::find($pedido->user_id);
+         $pdf = PDF::loadView('pdf.cliente.pedidos', compact('pedido','pedidos','cliente')); // se carga la data en la plantilla
+         return $pdf->stream('pedido.pdf');//retorna el pdf con el nombre compra_creditos.pdf
+  
+        }
+
+    public function pdfOrdenVendedor($id){
+        $orden = Orden::find($id); 
+        $ordenes = $orden->detalle_ordenes()->get();
+       $cliente = User::find($orden->user_id);
+        $pdf = PDF::loadView('pdf.vendedor.ordenes', compact('orden','ordenes','cliente')); // se carga la data en la plantilla
+        return $pdf->stream('orden.pdf');//retorna el pdf con el nombre compra_creditos.pdf
     }
 
 

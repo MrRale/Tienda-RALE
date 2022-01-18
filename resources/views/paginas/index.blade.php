@@ -42,6 +42,15 @@
             </div>
         </div>
 
+
+@if (Session::has('mensaje'))
+    <div class="alert alert-success alert-dismissible" role="alert">
+        {{ Session::get('mensaje') }}
+        <button type="button" class="close" data-dismiss="alert" role="alert">
+            <span aria-button="true">&times;</span>
+        </button>
+    </div>
+    @endif
         
 
         <!-- Begin Featured Categories Area -->

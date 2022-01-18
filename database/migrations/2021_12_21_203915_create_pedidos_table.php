@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePedidosTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+   
     public function up()
     {
         Schema::create('pedidos', function (Blueprint $table) {
@@ -22,7 +18,7 @@ class CreatePedidosTable extends Migration
             $table->string('estado_pedido')->default('pendiente');
             $table->string('empresa')->nullable();
             $table->string('ciudad');
-            $table->string('codigopostal');
+            // $table->string('codigopostal');
             $table->text('direccion');
             $table->decimal('costo_envio')->default(0);
             $table->unsignedBigInteger('user_id')->nullable();
@@ -34,11 +30,7 @@ class CreatePedidosTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+  
     public function down()
     {
         Schema::dropIfExists('pedidos');

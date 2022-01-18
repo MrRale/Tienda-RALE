@@ -34,6 +34,7 @@ Route::group(['middleware'=>'cliente'], function () {
     Route::get('/orden/detalle/{pedido}',[PedidoController::class, 'show'])->name('cliente.show');
     Route::get('/pasarela',[ClienteController::class, 'pasarela'])->name('cliente.pasarela');
     Route::post('/pasarela',[ClienteController::class, 'pagar'])->name('cliente.pagar');
+    Route::get('/perfil/pdf/pedido/{id}',[ClienteController::class, 'pdfPedido'])->name('cliente.pdfPedido');
 });
 
 
@@ -67,6 +68,9 @@ Route::group(['prefix' => 'admin', 'middleware'=>'admin'], function () {
     Route::get('/miembros/ventas/{id}',[AdminController::class,'ventasByMiembro'])->name('admin.ventasByMiembro');
     Route::get('/clientes/abonos',[AdminController::class,'verAbonos'])->name('admin.verAbonos');
     Route::post('/clientes/abonos',[AdminController::class,'abonosByCliente'])->name('admin.abonosByCliente');
+    //============ RUTAS PARA PDFS DEL ADMINISTRADOR =========//
+    Route::get('/pdf/cliente/pedido/{id}',[AdminController::class,'pdfPedidoCliente'])->name('admin.pdfPedidoCliente');
+    Route::get('/pdf/cliente/orden/{id}',[AdminController::class,'pdfOrdenVendedor'])->name('admin.pdfOrdenVendedor');
 
     //===========VISTAS PARA EL VENDEDOR, PERO QUE TMBN EL ADMIN TENDRA ACCESO =======//
     Route::get('/venta/agregar',[AdminController::class,'agregarVenta'])->name('admin.agregarVenta');

@@ -71,7 +71,7 @@
                                                         <th>FECHA</th>
                                                         <th>ESTADO</th>
                                                         <th>TOTAL</th>
-                                                        <th></th>
+                                                        <th>ACCIONES</th>
                                                     </tr>
                                                     @foreach($pedidos as $pedido)
                                                     <tr>
@@ -79,8 +79,12 @@
                                                         <td>{{$pedido->fecha}}</td>
                                                         <td>{{$pedido->estado_pedido}}</td>
                                                         <td>${{$pedido->total}}*{{$pedido->cantidad}} productos</td>
-                                                        <td><a href="{{route('cliente.show',$pedido)}}" class="uren-btn uren-btn_dark uren-btn_sm"><span>Ver detalles</span></a>
-                                                        </td>
+                                                        <td >
+                                                            <div style="display:flex; flex-direction:row; justify-content:space-around">
+                                                                <a href="{{route('cliente.show',$pedido)}}" class="uren-btn uren-btn_dark uren-btn_sm"><span>Detalles</span></a>
+                                                                <a href="{{route('cliente.pdfPedido',$pedido->id)}}" class="uren-btn uren-btn_dark uren-btn_sm ml-2" title="Generar pdf"><span style="color:white;"><li class="fas fa-file-pdf"></li></span></a>
+                                                            </div>   
+                                                    </td>
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
