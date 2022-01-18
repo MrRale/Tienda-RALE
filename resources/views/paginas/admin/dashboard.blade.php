@@ -419,34 +419,13 @@
             </a>
             <div class="collapse" id="page-layouts5">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route('admin.agregarVenta')}}">Agregar una venta</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{route('admin.misVentas')}}">Ver mis ventas</a></li>
+                <li class="newitem d-none d-lg-block"> <a class="nav-link" href="{{route('admin.agregarVenta')}}">Agregar una venta</a></li>
+                <li class="newitem"> <a class="nav-link" href="{{route('admin.misVentas')}}">Ver mis ventas</a></li>
               </ul>
             </div>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#page-layouts8" aria-expanded="false" aria-controls="page-layouts">
-              <i class="fab fa-trello menu-icon" style="color:black;!important"></i>
-              <span class="menu-title" style="color:black;!important">Clientes</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="page-layouts8">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route('admin.verClientes')}}">Ver clientes</a></li>
-              </ul>
-            </div>
-            <div class="collapse" id="page-layouts8">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route('admin.creditosCancelados')}}">Crédito cancelado</a></li>
-              </ul>
-            </div>
-            <div class="collapse" id="page-layouts8">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route('admin.creditosPendientes')}}">Crédito pendiente</a></li>
-              </ul>
-            </div>
-          </li>
+         
 
           {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#page-layouts7" aria-expanded="false" aria-controls="page-layouts">
@@ -461,6 +440,29 @@
             </div>
           </li> --}}
 @endif
+
+<li class="nav-item">
+  <a class="nav-link" data-toggle="collapse" href="#page-layouts8" aria-expanded="false" aria-controls="page-layouts">
+    <i class="fab fa-trello menu-icon" style="color:black;!important"></i>
+    <span class="menu-title" style="color:black;!important">Clientes</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="collapse" id="page-layouts8">
+    <ul class="nav flex-column sub-menu">
+      <li class="newitem d-none d-lg-block"> <a class="nav-link" href="{{route('admin.verClientes')}}">Ver clientes</a></li>
+    </ul>
+    <ul class="nav flex-column sub-menu">
+      <li class="newitem d-none d-lg-block"> <a class="nav-link" href="{{route('admin.verAbonos')}}">Ver abonos</a></li>
+    </ul>
+    <ul class="nav flex-column sub-menu">
+      <li class="newitem d-none d-lg-block"> <a class="nav-link" href="{{route('admin.creditosCancelados')}}">Crédito cancelado</a></li>
+    </ul>
+    <ul class="nav flex-column sub-menu">
+      <li class="newitem d-none d-lg-block"> <a class="nav-link" href="{{route('admin.creditosPendientes')}}">Crédito pendiente</a></li>
+    </ul>
+  </div>
+  
+</li>
 
 @if(auth()->user()->hasRole('Administrador'))
           <li class="nav-item">
@@ -517,7 +519,6 @@
               </ul>
             </div>
           </li>
-@endif
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#page-layouts4" aria-expanded="false" aria-controls="page-layouts">
               <i class="fas fa-dolly menu-icon" style="color:black;!important"></i>
@@ -533,6 +534,8 @@
               </ul>
             </div>
           </li>
+@endif
+    
       
         
          

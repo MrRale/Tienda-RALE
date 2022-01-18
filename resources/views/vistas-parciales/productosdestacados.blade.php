@@ -22,7 +22,7 @@
                             <div class="inner-slide">
                                 <div class="single-product">
                                     <div class="product-img">
-                                        <a href="single-product.html">
+                                        <a href="{{route('home.detalle',$pd)}}">
 
                                             @foreach ($pd->images->slice(0, 2) as $image)
                                                 <img src="{{ $image->url }}"

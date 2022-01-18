@@ -3,18 +3,18 @@
 @section('contenido')
 <div class="page-header">
     <h3 class="page-title">
-        Clientes
+        Abonos
     </h3>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Clientes</li>
+        <li class="breadcrumb-item active" aria-current="page">Abonos</li>
       </ol>
     </nav>
   </div>
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Clientes</h4>
+      <h4 class="card-title">Abonos</h4>
       <div class="row">
         <div class="col-12">
           <div class="table-responsive">
@@ -34,7 +34,7 @@
                 @foreach($clientes as $c)
               <tr>
                  {{--  apertura de formulario de abonar --}}
-                <form action="{{route('admin.guardarAbono')}}" id="formAbono{{$c->id}}" class="d-hidden" method="POST" >
+                 <form action="{{route('admin.abonosByCliente')}}" id="formAbonos{{$c->id}}" class="d-hidden" method="POST" >
                   @csrf
                   <input name="cliente_id" type="hidden" value="{{$c->id}}" />
                   <td>{{$c->id}}</td>
@@ -43,8 +43,8 @@
 
               
 
-                    <select id="cuenta" class="selectcuenta form-control" onchange="opcion()" name="cuenta_id" class="myniceselect nice-select wide" required>
-                      {{-- <option selected="true" disabled="disabled">Cuentas</option> --}}
+                    <select id="cuenta" class="selectcuenta form-control"  name="cuenta_id" class="myniceselect nice-select wide" required>
+                      <option selected="true" disabled="disabled">Cuentas</option>
                       @foreach($c->cuentas as $cuenta)
                       <option class="op" value="{{$cuenta->id}}">{{$cuenta->id}}</option>
                       @endforeach
@@ -61,20 +61,16 @@
              
                   <td>
                    
-      {{--  apertura de formulario de abonosByCliente --}}
-      <form action="{{route('admin.abonosByCliente')}}" id="formAbonos{{$c->id}}" class="d-hidden" method="POST" >
-        @csrf
-        <input name="cliente_id" type="hidden"  value="{{$c->id}}">
-        <input name="idcuenta" id="idcuenta" type="hidden" value="" >
-         </form> {{--  cierre de formulario de abonosByCliente --}}
+  
+     
+   
                    
 
                   
                     <a onclick="event.preventDefault();
                     document.getElementById('formAbonos{{$c->id}}').submit();" id="botoncol" class="btn btn-outline-info " title ="Ver abonos"><i class="far fa-money-bill-alt"></i></a>
             
-                      <a onclick="event.preventDefault();
-                      document.getElementById('formAbono{{$c->id}}').submit();" id="botoncol" class="btn btn-outline-primary  ">Abonar</a>
+                    
           
                   
                   </td>

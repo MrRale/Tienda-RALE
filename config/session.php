@@ -31,9 +31,9 @@ return [
     |
     */
 
-    'lifetime' => env('SESSION_LIFETIME', 120),
+    'lifetime' => env('SESSION_LIFETIME', 120), //2 horas
 
-    'expire_on_close' => false,
+    'expire_on_close' => false, //esta evita que la sesion se cierre al cerrar el navegador
 
     /*
     |--------------------------------------------------------------------------

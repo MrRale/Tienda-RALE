@@ -19,6 +19,9 @@
                    </div>
                     <div class="product-item_content">
                         <a href="{{route('home.detalle',$shopping_cart_detail->producto)}}" class="product-item_title">{{$shopping_cart_detail->producto->nombre}}</a>
+                        <br/>
+                        <a href="{{route('home.detalle',$shopping_cart_detail->producto)}}" class="product-item_title">{{$shopping_cart_detail->producto->codigo}}</a>
+                      
                         <span class="product-item_quantity">{{$shopping_cart_detail->cantidad}} x ${{$shopping_cart_detail->precio}}</span>
                     </div>
                 </li>

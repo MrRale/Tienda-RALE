@@ -63,7 +63,7 @@
                     
                       <a href="{{route('admin.detallePedidosVendedor',$orden->id)}}" id="botoncol" class="btn btn-outline-info " title ="Ver detalle"><i class="fas fa-eye"></i></a>
             
-                      <a href="{{route('admin.cambiarEstadoPedido',$orden->id)}}" id="botoncol" class="btn btn-outline-success " title ="Cambiar estado del pedido"><i class="fas fa-user-check"></i></a>
+                      <a href="{{route('admin.cambiarEstadoOrden',$orden->id)}}" id="botoncol" class="btn btn-outline-success " title ="Cambiar estado de la orden"><i class="fas fa-user-check"></i></a>
             
                        
                     </td>

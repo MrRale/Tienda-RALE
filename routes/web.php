@@ -54,14 +54,19 @@ Route::group(['prefix' => 'admin', 'middleware'=>'admin'], function () {
     Route::get('/productos/inventario/{id}',[ProductoController::class,'productosByInventario'])->name('producto.productosByInventario');
     Route::get('/pedidos',[AdminController::class,'pedidos'])->name('admin.pedidos');
     Route::get('/pedidos-vendedor',[AdminController::class,'pedidosVendedor'])->name('admin.pedidosVendedor');
-
+    
     Route::get('/detalle/pedido/{pedido}',[AdminController::class,'showPedido'])->name('admin.detallePedidos');
     Route::get('/detalle/pedido-vendedor/{id}',[AdminController::class,'showPedidoVendedor'])->name('admin.detallePedidosVendedor');
 
     Route::get('/detalle/estado/{id}',[AdminController::class,'cambiarEstadoPedido'])->name('admin.cambiarEstadoPedido');
+    Route::get('/detalle/estadoorden/{id}',[AdminController::class,'cambiarEstadoOrden'])->name('admin.cambiarEstadoOrden');
+   
     Route::get('/miembro/agregar',[AdminController::class,'agregarMiembro'])->name('admin.agregarMiembro');
     Route::post('/miembro/agregar',[AdminController::class,'guardarMiembro'])->name('admin.guardarMiembro');
     Route::get('/miembros/listar',[AdminController::class,'listarMiembros'])->name('admin.listarMiembros');
+    Route::get('/miembros/ventas/{id}',[AdminController::class,'ventasByMiembro'])->name('admin.ventasByMiembro');
+    Route::get('/clientes/abonos',[AdminController::class,'verAbonos'])->name('admin.verAbonos');
+    Route::post('/clientes/abonos',[AdminController::class,'abonosByCliente'])->name('admin.abonosByCliente');
 
     //===========VISTAS PARA EL VENDEDOR, PERO QUE TMBN EL ADMIN TENDRA ACCESO =======//
     Route::get('/venta/agregar',[AdminController::class,'agregarVenta'])->name('admin.agregarVenta');

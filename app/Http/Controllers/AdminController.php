@@ -37,6 +37,29 @@ class AdminController extends Controller
         return view('paginas.admin.pedidos.pedidosvendedor', compact('ordenes'));
     }
 
+    public function ventasByMiembro($id){
+        $ventas = Orden::where('user_id',$id)->get();
+        $vendedor = User::find($id);
+        
+        return view('paginas.admin.miembro.ventasByMiembro',compact('ventas','vendedor'));
+    }
+
+    public function verAbonos(){
+        $clientes =  User::role(['Cliente'])->get();
+        return view('paginas.vendedor.clientes.abonos',compact('clientes'));
+    }
+
+    public function abonosByCliente(Request $request){
+        
+        $cliente = User::find($request->cliente_id);
+        foreach($cliente->cuentas as $cuenta){
+            if($cuenta->id == $request->cuenta_id){
+                $abonos = Abono::where('cuenta_id',$cuenta->id)->get();
+            }
+        }
+     return view('paginas.vendedor.clientes.abonosByCliente',compact('abonos','cliente'));
+    }
+
     public function showPedido(Pedido $pedido){
         $pedidos = $pedido->detalle_pedidos()->get();
         $cliente = $pedido->user;
@@ -54,12 +77,24 @@ class AdminController extends Controller
     public function cambiarEstadoPedido($id){
         $pedido = Pedido::find($id);
         if($pedido->estado_pedido=="pendiente"){
-            $pedido->update(["estado_pedido"=>"entregado"]);
+            $pedido->update(["estado_pedido"=>"enviado"]);
         }else{
             $pedido->update(["estado_pedido"=>"pendiente"]);
         }
         
         Alert::toast('Pedido cambiado de estado', 'success');
+        return back();
+    }
+
+    public function cambiarEstadoOrden($id){
+        $orden = Orden::find($id);
+        if($orden->estado_pedido=="pendiente"){
+            $orden->update(["estado_pedido"=>"enviado"]);
+        }else{
+            $orden->update(["estado_pedido"=>"pendiente"]);
+        }
+        
+        Alert::toast('Orden cambiada de estado', 'success');
         return back();
     }
 
@@ -236,7 +271,7 @@ class AdminController extends Controller
                 "descripcion"=>$request['descripcion'],
                 "cantidad"=>$shopping_cart->cantidad_de_productos(),
                 "total"=>$request['totalreq'],
-                "estado_pedido"=>"entregado",
+                "estado_pedido"=>"enviado",
                 "empresa"=>$request['empresa'],
                 "ciudad"=>$request['ciudad'],
                 "codigopostal"=>$request['codigopostal'],
@@ -314,7 +349,7 @@ class AdminController extends Controller
                 "descripcion"=>$request['descripcion'],
                 "cantidad"=>$shopping_cart->cantidad_de_productos(),
                 "total"=>$request['totalreq'],
-                "estado_pedido"=>"entregado",
+                "estado_pedido"=>"enviado",
                 "empresa"=>$request['empresa'],
                 "ciudad"=>$request['ciudad'],
                 "codigopostal"=>$request['codigopostal'],

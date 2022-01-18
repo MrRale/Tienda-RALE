@@ -77,7 +77,7 @@
                 <tr>
                     <th>Producto #</th>
                     <th>Foto</th>
-                    <th>Producto</th>
+                    <th>Código</th>
                     <th>Cantidad</th>
                     <th>Precio</th>
                     <th>TOTAL</th>
@@ -91,7 +91,7 @@
                     <td>
                         <img src="  {{$detalle->producto->images->pluck('url')[0] }}" />
                     </td>
-                    <td>{{$detalle->producto->nombre}}</td>
+                    <td>{{$detalle->producto->codigo}}</td>
                     <td>{{$detalle->cantidad}}</td>
                     <td>{{$detalle->precio}}</td>
                     <td>{{$detalle->cantidad * $detalle->precio}}</td>

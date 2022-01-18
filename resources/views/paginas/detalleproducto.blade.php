@@ -77,13 +77,13 @@
                                 </div>
                                 <span class="reference">Referencia:{{$producto->codigo}}</span>
                                 <div class="rating-box">
-                                    <ul>
+                                    {{-- <ul>
                                         <li><i class="ion-android-star"></i></li>
                                         <li><i class="ion-android-star"></i></li>
                                         <li><i class="ion-android-star"></i></li>
                                         <li class="silver-color"><i class="ion-android-star"></i></li>
                                         <li class="silver-color"><i class="ion-android-star"></i></li>
-                                    </ul>
+                                    </ul> --}}
                                 </div>
                                 <div class="sp-essential_stuff">
                                     <ul>
@@ -108,7 +108,7 @@
                                 <div class="quantity">
                                     <label>Cantidad</label>
                                     <div class="cart-plus-minus">
-                                        <input type="number" class="cart-plus-minus-box" min="1" max="{{$producto->cantidad}}" name="cantidad" value="{{$producto->cantidad}}" >
+                                        <input class="cart-plus-minus-box" value="1" max="{{$producto->stock}}" type="number" name="cantidad">
                                         <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                         <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                     </div>
@@ -186,7 +186,7 @@
                                     <li><a class="active" data-toggle="tab"
                                             href="#description"><span>Descripción</span></a>
                                     </li>
-                                    <li><a data-toggle="tab" href="#specification"><span>Especificaciones</span></a></li>
+                                   
                                     <li><a data-toggle="tab" href="#reviews"><span>Comentarios (1)</span></a></li>
                                 </ul>
                             </div>
@@ -201,32 +201,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div id="specification" class="tab-pane" role="tabpanel">
-                                    <table class="table table-bordered specification-inner_stuff">
-                                        <tbody>
-                                            <tr>
-                                                <td colspan="2"><strong>Memory</strong></td>
-                                            </tr>
-                                        </tbody>
-                                        <tbody>
-                                            <tr>
-                                                <td>test 1</td>
-                                                <td>8gb</td>
-                                            </tr>
-                                        </tbody>
-                                        <tbody>
-                                            <tr>
-                                                <td colspan="2"><strong>Processor</strong></td>
-                                            </tr>
-                                        </tbody>
-                                        <tbody>
-                                            <tr>
-                                                <td>No. of Cores</td>
-                                                <td>1</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                              
                                 <div id="reviews" class="tab-pane" role="tabpanel">
                                     <div class="tab-pane active" id="tab-review">
                                         <form action="{{route('cliente.comentar',$producto)}}" method="POST" class="form-horizontal" id="form-review">

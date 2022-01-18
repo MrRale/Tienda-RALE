@@ -3,18 +3,18 @@
 @section('contenido')
 <div class="page-header">
     <h3 class="page-title">
-        Miembros
+        Clientes atendidos en la venta
     </h3>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Miembros</li>
+        <li class="breadcrumb-item active" aria-current="page"> Clientes atendidos en la venta por {{$vendedor->name}}</li>
       </ol>
     </nav>
   </div>
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Miembros</h4>
+      <h4 class="card-title"> Clientes atendidos en la venta por {{$vendedor->name}}</h4>
       <div class="row">
         <div class="col-12">
           <div class="table-responsive">
@@ -22,33 +22,34 @@
               <thead>
                 <tr>
                     <th>Miembro #</th>
-                    <th>Nombre</th>
+                    <th>Cliente</th>
                     <th>Cédula</th>
                     <th>RUC</th>
                     <th>Teléfono</th>
                     <th>Correo</th>
-                    <th>Rol</th>
+                    {{-- <th>Rol</th> --}}
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                  @foreach($miembros as $p)
+                  @foreach($ventas as $p)
                 <tr>
                     <td>{{$p->id}}</td>
-                    <td>{{$p->name}}</td>
+                    <td>{{$p->nombres}}</td>
                     <td>{{$p->cedula}}</td>
                     <td>{{$p->ruc}}</td>
                     <td>{{$p->telefono}}</td>
                     <td>{{$p->email}}</td>
-                    <td>{{$p->getRoleNames()}}</td>
+                    {{-- <td>{{$p->getRoleNames()}}</td> --}}
                     <td>
                   
-                        <form method="post" id="deletemiembro" action="{{url('admin/producto/'.$p->id)}}" class="d-inline">
-                        @csrf
-                        <a href="{{route('admin.ventasByMiembro',$p->id)}}" id="botoncol" class="btn btn-outline-info " title ="Ver ventas"><i class="fas fa-eye"></i></a>
-                        {{method_field('DELETE')}}
+                        {{-- <form method="post" id="deletemiembro" action="{{url('admin/producto/'.$p->id)}}" class="d-inline">
+                        @csrf --}}
+                        <a href="" id="botoncol" class="btn btn-outline-info " title ="Generar reporte"><i class="fas fa-file-pdf"></i></a>
+                      
+                        {{-- {{method_field('DELETE')}}
                         <button type="submit"  id="botoncol" class="btn btn-outline-danger" title="Eliminar miembro"><li class="fas fa-trash"></li></button>
-                      </form>
+                      </form> --}}
                     </td>
                 </tr>
 @endforeach
