@@ -12,7 +12,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\ShoppingCartDetailController;
-
+//hola
 Auth::routes();
 //-------------VISTAS DE LOS VISITANTES-----------//
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
