@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Abono;
 use App\Models\DetallePedido;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,6 +33,10 @@ class Pedido extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    // public function abonos(){
+    //     return $this->hasMany(Abono::class);
+    // }
 
     
 }

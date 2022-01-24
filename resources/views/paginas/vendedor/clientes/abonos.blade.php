@@ -23,9 +23,9 @@
                 <tr>
                     <th>Cliente #</th>
                     <th>Cédula</th>
-                    <th>Cuentas</th>
+                    <th>Orden</th>
                     <th>Teléfono</th>
-                    <th>Nombre</th>
+                    <th>Cliente</th>
                     <th>Correo electrónico</th>
                     <th>Acciones</th>
                 </tr>
@@ -33,7 +33,7 @@
               <tbody>
                 @foreach($clientes as $c)
               <tr>
-                 {{--  apertura de formulario de abonar --}}
+                 {{--  apertura de formulario de ver abonos --}}
                  <form action="{{route('admin.abonosByCliente')}}" id="formAbonos{{$c->id}}" class="d-hidden" method="POST" >
                   @csrf
                   <input name="cliente_id" type="hidden" value="{{$c->id}}" />
@@ -43,10 +43,10 @@
 
               
 
-                    <select id="cuenta" class="selectcuenta form-control"  name="cuenta_id" class="myniceselect nice-select wide" required>
-                      <option selected="true" disabled="disabled">Cuentas</option>
-                      @foreach($c->cuentas as $cuenta)
-                      <option class="op" value="{{$cuenta->id}}">{{$cuenta->id}}</option>
+                    <select id="cuenta" class="selectcuenta form-control"  name="orden_id" class="myniceselect nice-select wide" required>
+                      <option selected="true" disabled="disabled">Ordenes</option>
+                      @foreach($c->ordenes as $orden)
+                      <option class="op" value="{{$orden->id}}">{{$orden->id}}</option>
                       @endforeach
                   </select>
                
@@ -57,7 +57,7 @@
                   <td>{{$c->name}}</td>
                   <td>{{$c->email}}</td>
 
-                </form> {{--  cierre de formulario de abonar --}}
+                </form> {{--  cierre de formulario de ver abonos --}}
              
                   <td>
                    

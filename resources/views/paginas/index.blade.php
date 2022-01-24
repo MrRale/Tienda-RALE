@@ -22,7 +22,7 @@
                         <p class="short-desc">Conoce más sobre nosotros.
                         </p>
                         <div class="uren-btn-ps_center slide-btn">
-                            <a class="uren-btn" href="shop-left-sidebar.html">Aquí</a>
+                            <a class="uren-btn" href="{{route('home.tienda')}}">Aquí</a>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                         <p class="short-desc">Explora y conoce nuestros productos
                         </p>
                         <div class="uren-btn-ps_center slide-btn">
-                            <a class="uren-btn" href="shop-left-sidebar.html">Aquí</a>
+                            <a class="uren-btn" href="{{route('home.tienda')}}">Aquí</a>
                         </div>
                     </div>
                 </div>
@@ -43,14 +43,14 @@
         </div>
 
 
-@if (Session::has('mensaje'))
+{{-- @if (Session::has('mensaje'))
     <div class="alert alert-success alert-dismissible" role="alert">
         {{ Session::get('mensaje') }}
         <button type="button" class="close" data-dismiss="alert" role="alert">
             <span aria-button="true">&times;</span>
         </button>
     </div>
-    @endif
+    @endif --}}
         
 
         <!-- Begin Featured Categories Area -->

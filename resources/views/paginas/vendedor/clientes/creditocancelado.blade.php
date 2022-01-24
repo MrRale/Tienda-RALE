@@ -43,9 +43,10 @@
                   <td>{{$cancelado->user->name}}</td>
                   <td>{{$cancelado->user->email}}</td>
                   <td>
-                      <a target="_blank"  id="botoncol" href="{{route('admin.pdfCancelacionCredito',$cancelado->id)}}" class="btn btn-outline-success" title="Ver factura"><li class="fas fa-file-pdf"></li></a>
+                      <a target="_blank"  id="botoncol" href="" class="btn btn-outline-success" title="Ver factura"><li class="fas fa-file-pdf"></li></a>
+                  
                       <a  id="botoncol" class="btn btn-outline-info" title="Detalle de cliente"><li class="fas fa-eye"></li></a>
-                      <a  id="botoncol" class="btn btn-outline-danger" title="Eliminar"><li class="fas fa-tras"></li></a>
+                      <a  id="botoncol" class="btn btn-outline-danger" title="Eliminar"><li class="fas fa-trash"></li></a>
                  
                     </td>
               </tr>

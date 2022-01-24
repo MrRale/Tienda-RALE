@@ -15,7 +15,7 @@ class ControlCuenta extends Model
         "interes",
         "meses",
         "fecha",
-        "cuenta_id",
+        "orden_id",
     ];
 
     // public function cuenta(){

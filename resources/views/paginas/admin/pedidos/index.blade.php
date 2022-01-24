@@ -78,5 +78,18 @@
     </div>
   </div>
 
+  <script src="{{asset('dashboard/vendors/js/vendor.bundle.base.js')}}"></script>
+  <script src="{{asset('dashboard/vendors/js/vendor.bundle.addons.js')}}"></script>
+  <!-- endinject -->
+  <!-- inject:js -->
+  <script src="{{asset('dashboard/js/off-canvas.js')}}"></script>
+  <script src="{{asset('dashboard/js/hoverable-collapse.js')}}"></script>
+  <script src="{{asset('dashboard/js/misc.js')}}"></script>
+  <script src="{{asset('dashboard/js/settings.js')}}"></script>
+  <script src="{{asset('dashboard/js/todolist.js')}}"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{{asset('dashboard/js/data-table.js')}}"></script>
+
 
 @endsection

@@ -132,6 +132,11 @@ class ClienteController extends Controller
                 "producto_id"=>$scd->producto_id,
                 "pedido_id"=>$pedido->id,
             ]);
+            $producto = Producto::find($scd->producto_id);
+            $stock_actual = $producto->stock;
+            $producto->update([
+                "stock"=>$stock_actual-$scd->cantidad
+            ]);
         }
            $shopping_cart->delete(); //vaciamos o eliminamos el carrito al ya realizar el pedido
             return redirect()->route('cliente.perfil')->with('mensaje','Pedido realizado con exito'); //regresamos a la pagina anterior

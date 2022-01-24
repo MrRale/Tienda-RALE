@@ -90,7 +90,6 @@
                                         <li>Marca <a>{{$producto->marca}}</a></li>
                                         <li>Código de producto: <a href="javascript:void(0)">{{$producto->codigo}}</a></li>
                                         <li>Disponibilidad: <a>En stock</a></li>
-                                        <li>Medida: <a>{{$producto->medida}}</a></li>
                                         <li>Precio: <a>${{$producto->precio}}</a></li>
                                     </ul>
                                 </div>

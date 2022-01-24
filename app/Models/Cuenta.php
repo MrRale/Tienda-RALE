@@ -22,12 +22,12 @@ class Cuenta extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
-
+    
     public function control_cuenta(){
         return $this->hasOne(ControlCuenta::class);
     }
 
-    public function abonos(){
-        return $this->hasMany(Abono::class);
-    }
+    // public function abonos(){
+    //     return $this->hasMany(Abono::class);
+    // }
 }

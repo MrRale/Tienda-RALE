@@ -4,12 +4,13 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\InventarioController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\ShoppingCartDetailController;
 //hola
@@ -52,6 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware'=>'admin'], function () {
     Route::resource('producto', ProductoController::class);
     Route::resource('inventario', InventarioController::class);
     Route::get('/productos/categoria/{id}',[ProductoController::class,'productosByCategoria'])->name('producto.productosByCategoria');
+    Route::post('/productos/filtro',[ProductoController::class,'productosByCategoriaInventario'])->name('producto.productosByCategoriaInventario');
     Route::get('/productos/inventario/{id}',[ProductoController::class,'productosByInventario'])->name('producto.productosByInventario');
     Route::get('/pedidos',[AdminController::class,'pedidos'])->name('admin.pedidos');
     Route::get('/pedidos-vendedor',[AdminController::class,'pedidosVendedor'])->name('admin.pedidosVendedor');
@@ -62,6 +64,11 @@ Route::group(['prefix' => 'admin', 'middleware'=>'admin'], function () {
     Route::get('/detalle/estado/{id}',[AdminController::class,'cambiarEstadoPedido'])->name('admin.cambiarEstadoPedido');
     Route::get('/detalle/estadoorden/{id}',[AdminController::class,'cambiarEstadoOrden'])->name('admin.cambiarEstadoOrden');
    
+    //================ RUTAS PARA GESTION DE LA INFORMACION DE LA EMPRESA =====//
+    // Route::resource('empresa',EmpresaCotroller::class)->names('empresa');/
+    Route::get('/empresa/editar',[EmpresaController::class,'editar'])->name('empresa.empresaEditar');
+    Route::post('/empresa/guardar',[EmpresaController::class,'guardarDatos'])->name('empresa.guardarDatos');
+
     Route::get('/miembro/agregar',[AdminController::class,'agregarMiembro'])->name('admin.agregarMiembro');
     Route::post('/miembro/agregar',[AdminController::class,'guardarMiembro'])->name('admin.guardarMiembro');
     Route::get('/miembros/listar',[AdminController::class,'listarMiembros'])->name('admin.listarMiembros');
@@ -78,9 +85,10 @@ Route::group(['prefix' => 'admin', 'middleware'=>'admin'], function () {
     Route::get('/ventas/misventas',[AdminController::class,'misVentas'])->name('admin.misVentas');
     Route::get('/ventas/detalle/{id}',[AdminController::class,'showVenta'])->name('admin.detalleVenta');
     Route::post('/abonos/abonar',[AdminController::class, 'agregarAbono'])->name('admin.agregarAbono');
-    Route::post('/abonos/abonar',[AdminController::class,'guardarAbono'])->name('admin.guardarAbono');
+    Route::get('/abonos/abonar/{idcliente}/{idorden}',[AdminController::class,'guardarAbono'])->name('admin.guardarAbono');
     Route::post('/abonos/guardar',[AdminController::class,'storeAbono'])->name('admin.storeAbono');
     Route::get('/clientes',[AdminController::class, 'verClientes'])->name('admin.verClientes');
     Route::get('/clientes/credito/cancelado',[AdminController::class,'creditosCancelados'])->name('admin.creditosCancelados');
     Route::get('/clientes/credito/pendiente',[AdminController::class,'creditosPendientes'])->name('admin.creditosPendientes');
+    Route::get('/clientes/ordenes/{id}',[AdminController::class,'ordenesCliente'])->name('admin.ordenesCliente');
 });

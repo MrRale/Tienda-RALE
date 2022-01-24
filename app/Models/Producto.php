@@ -21,7 +21,6 @@ class Producto extends Model
         "precio",
         "descripcion",
         "codigo",
-        "medida",
         "inventario_id",
         "categoria_id",
     ];

@@ -6,21 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateOrdensTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {//para saber a quien se va a facturar la venta
         Schema::create('ordens', function (Blueprint $table) {
             $table->id();
-            $table->string('cedula',10)->unique();
-            $table->string('ruc',13)->unique()->nullable();
-            $table->string('telefono')->unique();
+            $table->string('cedula',10);
+            $table->string('ruc',13)->nullable();
+            $table->string('telefono');
             $table->string('nombres');
             $table->string('apellidos');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->datetime('fecha');
             $table->longText('descripcion')->nullable();
             $table->integer('cantidad')->default(0);
@@ -28,11 +24,12 @@ class CreateOrdensTable extends Migration
             $table->string('estado_pedido')->default('pendiente');
             $table->string('empresa')->nullable();
             $table->string('ciudad');
-            $table->string('codigopostal');
+            $table->decimal('saldo')->default(0);
             $table->text('direccion');
             $table->decimal('costo_envio')->default(0);
-            $table->unsignedBigInteger('user_id')->nullable();//para saber quien hizo la venta
+            $table->unsignedBigInteger('user_id')->nullable();//para saber a quien se le vendio
             $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('vendedor_id')->nullable();//para saber quien hizo la venta
             $table->unsignedBigInteger('factura_id')->nullable();
             $table->foreign('factura_id')->references('id')->on('facturas')
             ->onUpdate('cascade')->onDelete('cascade');

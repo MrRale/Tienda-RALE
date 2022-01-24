@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\ControlOrden;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Orden extends Model
 {
@@ -24,11 +25,12 @@ class Orden extends Model
         "estado_pedido",
         "empresa",
         "ciudad",
-        "codigopostal",
         "direccion",
         "costo_envio",
+        "vendedor_id",
         "user_id",
         "factura_id",
+        "saldo"
     ];
 
     public function image(){
@@ -36,6 +38,10 @@ class Orden extends Model
     }
     public function detalle_ordenes(){
         return $this->hasMany(DetalleOrden::class);
+    }
+
+    public function control_orden(){
+        return $this->hasOne(ControlOrden::class);
     }
 
     public function user(){

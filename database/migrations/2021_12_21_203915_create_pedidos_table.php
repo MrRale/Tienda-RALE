@@ -18,7 +18,6 @@ class CreatePedidosTable extends Migration
             $table->string('estado_pedido')->default('pendiente');
             $table->string('empresa')->nullable();
             $table->string('ciudad');
-            // $table->string('codigopostal');
             $table->text('direccion');
             $table->decimal('costo_envio')->default(0);
             $table->unsignedBigInteger('user_id')->nullable();

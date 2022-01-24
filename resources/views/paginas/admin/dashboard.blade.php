@@ -193,13 +193,18 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
-                <i class="fas fa-cog text-primary"></i>
-                Settings
-              </a>
+                {{-- <i class="fas fa-cog text-primary"></i>
+             
+              </a> --}}
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item">
+              <form id="logout-form" action="{{ route('logout') }}" method="POST"
+              class="d-none">
+              @csrf
+          </form>
+              <a onclick="event.preventDefault();
+              document.getElementById('logout-form').submit();" class="dropdown-item">
                 <i class="fas fa-power-off text-primary"></i>
-                Logout
+                Cerrar sesión
               </a>
             </div>
           </li>
@@ -410,6 +415,19 @@
               <span class="menu-title" style="color:black;!important">Página de inicio</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#page-layouts9" aria-expanded="false" aria-controls="page-layouts">
+              <i class="fab fa-trello menu-icon" style="color:black;!important"></i>
+              <span class="menu-title" style="color:black;!important">Empresa</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="page-layouts9">
+              <ul class="nav flex-column sub-menu">
+                <li class="newitem"> <a class="nav-link" href="{{route('empresa.empresaEditar')}}">Actualizar datos</a></li>
+              </ul>
+            </div>
+          </li>
+
           @if(auth()->user()->hasRole('Vendedor'))
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#page-layouts5" aria-expanded="false" aria-controls="page-layouts">

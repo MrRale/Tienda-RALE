@@ -50,10 +50,6 @@
             <input name="stock" type="number" class="form-control" value="{{$producto->stock}}" id="exampleInputName1" placeholder="stock">
           </div>
 
-           <div class="form-group">
-            <label for="codigo">Medida</label>
-            <input name="medida" type="text" class="form-control" value="{{$producto->medida}}" id="exampleInputName1" placeholder="medida">
-          </div>
 
           <div class="form-group">
             <label for="exampleTextarea1">Descripción</label>

@@ -23,9 +23,9 @@
                 <tr>
                     <th>Cliente #</th>
                     <th>Cédula</th>
-                    <th>Cuentas</th>
+                    {{-- <th>Ordenes</th> --}}
                     <th>Teléfono</th>
-                    <th>Nombre</th>
+                    <th>Cliente</th>
                     <th>Correo electrónico</th>
                     <th>Acciones</th>
                 </tr>
@@ -33,49 +33,22 @@
               <tbody>
                 @foreach($clientes as $c)
               <tr>
-                 {{--  apertura de formulario de abonar --}}
-                <form action="{{route('admin.guardarAbono')}}" id="formAbono{{$c->id}}" class="d-hidden" method="POST" >
-                  @csrf
-                  <input name="cliente_id" type="hidden" value="{{$c->id}}" />
                   <td>{{$c->id}}</td>
                   <td>{{$c->cedula}}</td>
-                  <td>
 
-              
 
-                    <select id="cuenta" class="selectcuenta form-control" onchange="opcion()" name="cuenta_id" class="myniceselect nice-select wide" required>
-                      {{-- <option selected="true" disabled="disabled">Cuentas</option> --}}
-                      @foreach($c->cuentas as $cuenta)
-                      <option class="op" value="{{$cuenta->id}}">{{$cuenta->id}}</option>
-                      @endforeach
-                  </select>
-               
-               
-
-                  </td>
                   <td>{{$c->telefono}}</td>
                   <td>{{$c->name}}</td>
                   <td>{{$c->email}}</td>
 
-                </form> {{--  cierre de formulario de abonar --}}
+                </form> 
              
                   <td>
-                   
-      {{--  apertura de formulario de abonosByCliente --}}
-      <form action="{{route('admin.abonosByCliente')}}" id="formAbonos{{$c->id}}" class="d-hidden" method="POST" >
-        @csrf
-        <input name="cliente_id" type="hidden"  value="{{$c->id}}">
-        <input name="idcuenta" id="idcuenta" type="hidden" value="" >
-         </form> {{--  cierre de formulario de abonosByCliente --}}
-                   
-
-                  
-                    <a onclick="event.preventDefault();
-                    document.getElementById('formAbonos{{$c->id}}').submit();" id="botoncol" class="btn btn-outline-info " title ="Ver abonos"><i class="far fa-money-bill-alt"></i></a>
+                      
+   
+                    <a  id="botoncol" class="btn btn-outline-info " title ="Ver detalles"><i class="fas fa-eye"></i></a>
             
-                      <a onclick="event.preventDefault();
-                      document.getElementById('formAbono{{$c->id}}').submit();" id="botoncol" class="btn btn-outline-primary  ">Abonar</a>
-          
+                   
                   
                   </td>
               </tr>
@@ -88,7 +61,6 @@
     </div>
   </div>
 
-  
 
   <script src="{{asset('dashboard/vendors/js/vendor.bundle.base.js')}}"></script>
   <script src="{{asset('dashboard/vendors/js/vendor.bundle.addons.js')}}"></script>

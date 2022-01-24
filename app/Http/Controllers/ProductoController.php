@@ -19,6 +19,20 @@ class ProductoController extends Controller
     }
 
 
+    public function productosByCategoriaInventario(Request $request){
+        if(!$request->inventario_id){
+            Alert::toast('Especifique el inventario por el que quiere filtrar el producto','info');
+            return back();
+        }
+        // dd($request->categoria_id,$request->inventario_id);
+
+        $productos = Producto::where(
+            ['categoria_id'=>$request->categoria_id],
+            ['inventario_id'=>$request->inventario_id])->get();
+            // dd($productos);
+            return view('paginas.admin.filtros.productosByCategoriaInventario', compact('productos'));
+
+    }
     public function productosByCategoria($id){
         $productos = Producto::where('categoria_id',$id)->get();
         return view('paginas.admin.filtros.productosByCategoria', compact('productos'));
@@ -56,9 +70,9 @@ class ProductoController extends Controller
 
         $campos = [
             'nombre' => 'required|string|max:50',
-            'marca' => 'required|string|max:30',
+            'marca' => 'max:30',
             'stock' => 'required|numeric|min:1',
-            'descripcion' => 'string|max:256',
+            'descripcion' => 'max:256',
             'codigo'=>'required|string|max:15',
             'precio'=>'required|numeric|min:0.01',
             'imagen' => 'max:1000|mimes:jpeg,png,jpg',
@@ -85,7 +99,6 @@ class ProductoController extends Controller
         $producto =  Producto::create([
             "nombre" => $request['nombre'],
             "marca" => $request['marca'],
-            "medida" =>$request['medida'],
             "stock"=>$request['stock'],
             "descripcion" =>$request['descripcion'],
             "codigo" =>$request['codigo'],
@@ -108,7 +121,6 @@ class ProductoController extends Controller
         $producto->update([
             "nombre"=>$request['nombre'],
             "descripcion"=>$request['descripcion'],
-            "medida"=>$request['medida'],
             "stock"=>$request['stock'],
             "precio"=>$request['precio'],
             "codigo"=>$request['codigo'],
@@ -167,9 +179,9 @@ class ProductoController extends Controller
         
         $campos = [
             'nombre' => 'required|string|max:50',
-            'marca' => 'required|string|max:30',
+             'marca' => 'max:30',
             'stock' => 'required|numeric|min:1',
-            'descripcion' => 'string|max:256',
+            'descripcion' => 'max:256',
             'codigo'=>'required|string|max:15',
             'precio'=>'required|numeric|min:0.01',
             'categoria_id'=>'required',
@@ -178,7 +190,7 @@ class ProductoController extends Controller
         $mensaje = [
             'required' => ':attribute es requerido',
             'nombre.max'=>'El nombre no debe sobrepasar los 50 caracteres',
-            'marca.max'=>'La marca no debe sobrepasar los 30 caracteres',
+             'marca.max'=>'La marca no debe sobrepasar los 30 caracteres',
             'stock.min'=>'El stock no debe tener al menos 1 producto',
             'codigo.max'=>'El codigo no debe tener mas de 15 digitos',
             'precio.min'=>'El precio debe tener un valor mayor a cero',
@@ -193,8 +205,6 @@ class ProductoController extends Controller
         $producto->update([
             "nombre"=>$request['nombre'],
             "descripcion"=>$request['descripcion'],
-            "medida"=>$request['medida'],
-
             "stock"=>$request['stock'],
             "precio"=>$request['precio'],
             "codigo"=>$request['codigo'],

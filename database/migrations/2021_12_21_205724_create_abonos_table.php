@@ -17,8 +17,10 @@ class CreateAbonosTable extends Migration
             $table->id();
             $table->datetime('fecha');
             $table->decimal('valor')->default(0);
-            $table->unsignedBigInteger('cuenta_id'); // para saber a que cuenta se hace el abono
-            $table->foreign('cuenta_id')->references('id')->on('cuentas')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('orden_id'); // para saber a que cuenta se hace el abono
+            $table->foreign('orden_id')->references('id')->on('ordens')->onDelete('cascade')->onUpdate('cascade');
+            // $table->unsignedBigInteger('cuenta_id'); // para saber a que cuenta se hace el abono
+            // $table->foreign('cuenta_id')->references('id')->on('cuentas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

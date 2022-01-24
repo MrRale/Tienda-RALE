@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Inventario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -18,7 +19,8 @@ class CategoriaController extends Controller
     public function index()
     {
         $categorias =  Categoria::all();
-        return view('paginas.admin.categoria.listar', compact('categorias'));
+        $inventarios = Inventario::all();
+        return view('paginas.admin.categoria.listar', compact('categorias','inventarios'));
     }
 
     /**

@@ -49,10 +49,7 @@
             <input name="stock" min="1"  type="number" class="form-control" id="exampleInputName1" placeholder="stock">
           </div>
 
-           <div class="form-group">
-            <label for="codigo">Medida</label>
-            <input name="medida" type="text" class="form-control" id="exampleInputName1" placeholder="medida">
-          </div>
+        
 
           <div class="form-group">
             <label for="exampleTextarea1">Descripción</label>

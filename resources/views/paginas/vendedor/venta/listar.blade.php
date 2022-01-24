@@ -43,7 +43,7 @@
                     <th>Venta #</th>
                     <th>Fecha</th>
                     <th>Descripcion</th>
-                    <th>Vendedor</th>
+                    <th>Cliente</th>
                     <th>Estado</th>
                     <th>Total</th>
                     <th>Acciones</th>

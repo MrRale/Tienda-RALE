@@ -51,8 +51,23 @@ class PermissionTableSeeder extends Seeder
     $admin->assignRole('Administrador');//asignamos el rol de administrador al usuario creado
 
 
+ //-------USER DE ROL TIPO VENDEDOR-----------//
+ $cliente = User::create([
+    'cedula'=>'0101415054',
+    'ruc'=>'0101415054001',
+    'telefono'=>'0988703046',
+    // 'direccion'=>'Av. Jorge Chiriboga',
+    // 'empresa'=>'EPACEM',
+   'name'=>'Pablo',
+   'email'=>'pablo@gmail.com',
+    'password'=>'$2y$10$UWrWMU9GPWytScvIDu5fMOJTfiCvqA/ZpjxTiu7Js0310ySTjuYPy'//morales98
+]);
+$cliente->assignRole('Vendedor');//asignamos el rol de administrador al usuario creado
+
+
+
     //-------USER DE ROL O TIPO CLIENTE-----------//
-    $admin = User::create([
+    $cliente = User::create([
         'cedula'=>'2100463183',
         'ruc'=>'2100463183001',
         'telefono'=>'0988703044',
@@ -62,6 +77,8 @@ class PermissionTableSeeder extends Seeder
        'email'=>'sara@gmail.com',
         'password'=>'$2y$10$UWrWMU9GPWytScvIDu5fMOJTfiCvqA/ZpjxTiu7Js0310ySTjuYPy'//morales98
     ]);
-    $admin->assignRole('Cliente');//asignamos el rol de administrador al usuario creado
-    }
+    $cliente->assignRole('Cliente');//asignamos el rol de administrador al usuario creado
+   
+
+}
 }

@@ -29,9 +29,9 @@
       <div class="card-body">
         <div style="display:flex; flex-direction:row;justify-content:space-around">
           <h4 class="card-title">Cliente: {{$cliente->name}}</h4>
-          <h4 class="card-title">Cuenta: {{$cuenta->id}}</h4>
-          <h4 class="card-title">Cuotas: ${{$cuenta->control_cuenta->cuota}} X {{$cuenta->control_cuenta->meses}} meses.</h4>
-          <h4 class="card-title">Saldo actual: ${{$cuenta->saldo}}</h4>  
+          <h4 class="card-title">Orden: {{$orden->id}}</h4>
+          <h4 class="card-title">Cuotas: ${{$orden->control_orden->cuota}} X {{$orden->control_orden->meses}} meses.</h4>
+          <h4 class="card-title">Saldo actual: ${{$orden->saldo}}</h4>  
         </div>
      
         <p class="card-description">
@@ -44,7 +44,7 @@
             <label for="exampleInputEmail3">Monto</label>
             <input  class="form-control" type="number" step="0.01" name="monto"  id="monto" required>
           </div>
-        <input type="hidden" name="cuenta_id" value="{{$cuenta->id}}" />
+        <input type="hidden" name="orden_id" value="{{$orden->id}}" />
  
           <div class="form-group">
             <label for="exampleInputEmail3">Comprobante de depósito</label>

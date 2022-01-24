@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Cuenta;
+use App\Models\Image;
+use App\Models\Orden;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -12,9 +13,14 @@ class Abono extends Model
     public $fillable=[
         "fecha",
         "valor",
-        "cuenta_id",
+        "orden_id"
     ];
-    public function cuenta(){
-        return $this->belongsTo(Cuenta::class);
+
+    public function orden(){
+        return $this->belongsTo(Orden::class);
+    }
+
+    public function images(){
+        return $this->morphMany(Image::class, 'imageable');
     }
 }

@@ -39,8 +39,10 @@ class ShoppingCart extends Model
     }
 
     public function total_impuesto(){
+        $empresa = Empresa::first();
+        $iva = $empresa->iva;
         $total = $this->total_precios();
-        $total = $total * 0.12;
+        $total = $total * ($iva/100);
         return $total;
     }
 

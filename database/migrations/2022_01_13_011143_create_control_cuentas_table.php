@@ -19,8 +19,8 @@ class CreateControlCuentasTable extends Migration
             $table->decimal('interes')->default(0);
             $table->integer('meses')->nullable();
             $table->datetime('fecha');
-            $table->unsignedBigInteger('cuenta_id'); // para saber de que cuenta es el control
-            $table->foreign('cuenta_id')->references('id')->on('cuentas')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('orden_id'); // para saber de que cuenta es el control
+            $table->foreign('orden_id')->references('id')->on('ordens')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

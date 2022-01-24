@@ -15,6 +15,10 @@
   <div class="card">
     <div class="card-body">
       <h4 class="card-title">Abonos del cliente {{$cliente->name}}</h4>
+      <div class="my-5" style="display:flex; flex-direction:row; justify-content:space-between;">
+        <a href="{{route('admin.guardarAbono',[$cliente->id, $orden->id])}}" class="btn btn-success"> Agregar abono</a>
+      <h3>Saldo: ${{$saldo}}</h3>
+      </div>
       <div class="row">
         <div class="col-12">
           <div class="table-responsive">
@@ -23,22 +27,20 @@
                 <tr>
                     <th>Abono #</th>
                     <th>Fecha</th>
-                    <th>N° Cuenta</th>
-                    <th>Saldo</th>
+                    <th>Foto</th>
+                    <th>Valor</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach($abonos as $c)
               <tr>
-                <form action="{{route('admin.guardarAbono')}}" id="formAbono{{$c->id}}" class="d-hidden" method="POST" >
-                  @csrf
-                  <input name="cliente_id" type="hidden" value="{{$c->id}}" />
+               
                   <td>{{$c->id}}</td>
                   <td>{{$c->fecha}}</td>
-                <td>{{$c->cuenta->id}}</td>
-                <td>{{$c->cuenta->saldo}}</td>
-                  </form>
+         <td><img src="" alt="foto del abono"></td>
+                <td>{{$c->valor}}</td>
+                
                   <td>
                       <a id="botoncol" class="btn btn-outline-danger"><li class="fa fa-file-pdf"></li></a>
           
